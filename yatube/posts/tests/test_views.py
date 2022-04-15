@@ -61,8 +61,8 @@ class PostPagesTests(TestCase):
     def setUp(self):
         self.authorized_client = Client()
         self.authorized_client_2 = Client()
-        self.authorized_client_2.force_login(PostPagesTests.another_user)
         self.authorized_client.force_login(PostPagesTests.user)
+        self.authorized_client_2.force_login(PostPagesTests.another_user)
 
     def test_url_pages_uses_correct_template(self):
         """URL-адрес использует соответствующий шаблон."""
@@ -222,27 +222,27 @@ class PostPagesTests(TestCase):
         self.assertEqual(self.another_post, first_post_object)
         self.assertNotEqual(self.post_2, first_post_object)
 
-    def test_post_in_follow_index(self):
+    def test_post_follow_and_unfollow(self):
         """Авторизованный пользователь может подписываться на других
         пользователей и удалять их из подписок"""
-        self.followw = Follow.objects.create(
-            user=self.another_user,
-            author=self.user_2,
-        )
-        follower = self.followw.user
-        following = self.followw.author
-        self.assertEqual(
-            follower, User.objects.get(username='another-user'))
-        self.assertEqual(
-            following, User.objects.get(username='test_2-user'))
-        follow = Follow.objects.filter(
-            user=self.another_user,
-            author=self.user_2,
-        )
-        follow.delete()
-        self.assertFalse(
+        response = self.authorized_client.get(reverse(
+            'posts:profile_follow', kwargs={'username': 'another-user'}))
+        self.assertTrue(
             Follow.objects.filter(
-                user=self.another_user,
-                author=self.user_2,
+                user=self.user,
+                author=self.another_user,
             ).exists()
         )
+        self.assertRedirects(response, reverse(
+            'posts:profile', kwargs={'username': 'another-user'}))
+
+        response_2 = self.authorized_client.get(reverse(
+            'posts:profile_unfollow', kwargs={'username': 'another-user'}))
+        self.assertFalse(
+            Follow.objects.filter(
+                user=self.user,
+                author=self.another_user,
+            ).exists()
+        )
+        self.assertRedirects(response_2, reverse(
+            'posts:profile', kwargs={'username': 'another-user'}))

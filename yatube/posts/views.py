@@ -7,7 +7,7 @@ from .utils import paginate
 
 
 def index(request):
-    post_list = Post.objects.all()
+    post_list = Post.objects.select_related('group').all()
     page_obj = paginate(request, post_list)
     context = {
         'page_obj': page_obj,
@@ -122,11 +122,7 @@ def follow_index(request):
 def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
     if request.user != author:
-        if not Follow.objects.filter(author=author, user=request.user):
-            follower = Follow.objects.create(
-                author=author,
-                user=request.user)
-            follower.save()
+        Follow.objects.get_or_create(author=author, user=request.user)
     return redirect('posts:profile', username)
 
 
