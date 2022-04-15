@@ -222,27 +222,30 @@ class PostPagesTests(TestCase):
         self.assertEqual(self.another_post, first_post_object)
         self.assertNotEqual(self.post_2, first_post_object)
 
-    def test_post_follow_and_unfollow(self):
+    def test_post_follow(self):
         """Авторизованный пользователь может подписываться на других
-        пользователей и удалять их из подписок"""
-        response = self.authorized_client.get(reverse(
-            'posts:profile_follow', kwargs={'username': 'another-user'}))
+        пользователей"""
+        response = self.authorized_client_2.get(reverse(
+            'posts:profile_follow', args=('test_2-user',)))
         self.assertTrue(
             Follow.objects.filter(
-                user=self.user,
-                author=self.another_user,
+                user=self.another_user,
+                author=self.user_2,
             ).exists()
         )
         self.assertRedirects(response, reverse(
-            'posts:profile', kwargs={'username': 'another-user'}))
+            'posts:profile', args=('test_2-user',)))
 
-        response_2 = self.authorized_client.get(reverse(
-            'posts:profile_unfollow', kwargs={'username': 'another-user'}))
+    def test_post_unfollow(self):
+        """Авторизованный пользователь может удалять из подписок
+        других пользователей"""
+        response = self.authorized_client_2.get(reverse(
+            'posts:profile_unfollow', args=('test_2-user',)))
         self.assertFalse(
             Follow.objects.filter(
-                user=self.user,
-                author=self.another_user,
+                user=self.another_user,
+                author=self.user_2,
             ).exists()
         )
-        self.assertRedirects(response_2, reverse(
-            'posts:profile', kwargs={'username': 'another-user'}))
+        self.assertRedirects(response, reverse(
+            'posts:profile', args=('test_2-user',)))
