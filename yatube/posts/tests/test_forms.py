@@ -189,7 +189,7 @@ class PostCreateFormTests(TestCase):
         self.assertEqual(Comment.objects.count(), comment_count + 1)
 
     def test_cache_in_home_page(self):
-        """Тестирование кеша главной страницы"""
+        """Тестирование кеша на главной странице"""
         response = self.authorized_client.get(reverse('posts:index'))
         self.cache = response.content
         cache_post = Post.objects.create(
