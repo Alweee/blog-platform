@@ -4,6 +4,7 @@ from http import HTTPStatus
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
@@ -188,9 +189,9 @@ class PostCreateFormTests(TestCase):
         self.assertEqual(Comment.objects.count(), comment_count + 1)
 
     def test_cache_in_home_page(self):
-        """Тестирование кеша главной страницы"""
+        """Тестирование кеша на главной странице"""
         response = self.authorized_client.get(reverse('posts:index'))
-        cache = response.content
+        self.cache = response.content
         cache_post = Post.objects.create(
             text='Текст кешированного поста',
             author=self.user,
@@ -199,4 +200,6 @@ class PostCreateFormTests(TestCase):
         )
         cache_post.delete()
         response_2 = self.authorized_client.get(reverse('posts:index'))
-        self.assertEqual(response_2.content, cache)
+        self.assertEqual(response_2.content, self.cache)
+        cache.clear()
+        self.assertNotEqual(cache, response_2.content)
