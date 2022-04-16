@@ -89,11 +89,10 @@ class Follow(models.Model):
     )
 
     class Meta:
-        db_table = 'posts_follow'
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'author'],
-                name='smtt')
+                name='unique follow')
         ]
 
     def __str__(self):
