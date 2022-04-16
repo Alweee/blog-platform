@@ -92,7 +92,7 @@ class Follow(models.Model):
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'author'],
-                name='smt')
+                name='unique follow')
         ]
 
     def __str__(self):
