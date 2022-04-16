@@ -89,7 +89,6 @@ class Follow(models.Model):
     )
 
     class Meta:
-        db_table = 'sqlite3'
         constraints = [
             models.UniqueConstraint(
                 fields=['user', 'author'],
