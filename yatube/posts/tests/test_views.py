@@ -26,17 +26,17 @@ class PostPagesTests(TestCase):
             description='Тестовое описание',
         )
         cls.post = Post.objects.create(
-            text='Текст поста',
+            text='Тестовый пост',
             author=cls.user,
             group=cls.group,
         )
         cls.post_2 = Post.objects.create(
-            text='Текст постааа',
+            text='Тестовый пост',
             author=cls.user,
             group=cls.group,
         )
         cls.another_post = Post.objects.create(
-            text='Текст поста',
+            text='Тестовый пост',
             author=cls.user_2,
             group=cls.group,
         )
@@ -47,7 +47,7 @@ class PostPagesTests(TestCase):
         cls.posts = []
         for i in range(12):
             cls.posts.append(Post(
-                text=f'Тестовый пост {i}',
+                text='Тестовый пост',
                 author=cls.user,
                 group=cls.group))
         Post.objects.bulk_create(cls.posts)
@@ -99,7 +99,7 @@ class PostPagesTests(TestCase):
         post_text_0 = first_post_object.text
         self.assertEqual(post_author_0, PostPagesTests.user)
         self.assertEqual(post_group_0, PostPagesTests.group)
-        self.assertEqual(post_text_0, 'Тестовый пост 11')
+        self.assertEqual(post_text_0, 'Тестовый пост')
 
     def test_posts_group_list_page_show_correct_context(self):
         """Шаблон posts:group_list сформирован с правильным контекстом."""
@@ -111,7 +111,7 @@ class PostPagesTests(TestCase):
         post_text_0 = first_post_object.text
         self.assertEqual(post_author_0, PostPagesTests.user)
         self.assertEqual(post_group_0, PostPagesTests.group)
-        self.assertEqual(post_text_0, 'Тестовый пост 11')
+        self.assertEqual(post_text_0, 'Тестовый пост')
 
     def test_posts_profile_page_show_correct_context(self):
         """Адрес posts:profile сформирован с правильным контекстом."""
@@ -123,7 +123,7 @@ class PostPagesTests(TestCase):
         post_text_0 = first_post_object.text
         self.assertEqual(post_author_0, PostPagesTests.user)
         self.assertEqual(post_group_0, PostPagesTests.group)
-        self.assertEqual(post_text_0, 'Тестовый пост 11')
+        self.assertEqual(post_text_0, 'Тестовый пост')
 
     def test_posts_detail_page_show_correct_context(self):
         """Адрес posts:post_detail сформирован с правильным контекстом."""
@@ -135,7 +135,7 @@ class PostPagesTests(TestCase):
         post_text_0 = first_post_object.text
         self.assertEqual(post_author_0, PostPagesTests.user)
         self.assertEqual(post_group_0, PostPagesTests.group)
-        self.assertEqual(post_text_0, 'Текст поста')
+        self.assertEqual(post_text_0, PostPagesTests.post.text)
 
     def test_posts_create_form_show_correct_context(self):
         """Шаблон posts:post_create сформирован с правильным контекстом."""
