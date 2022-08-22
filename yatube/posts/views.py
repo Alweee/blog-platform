@@ -57,7 +57,7 @@ def post_detail(request, post_id):
         'form': form,
         'comments': comments,
     }
-    return render(request, 'posts/post_detail.html', context)
+    return render(request, 'posts/post_detail.html', context) # комментарий
 
 
 @login_required
@@ -69,7 +69,7 @@ def post_create(request):
     if form.is_valid():
         post = form.save(commit=False)
         post.author = request.user
-        form.save()
+        post.save()
         return redirect('posts:profile', request.user)
     return render(request, 'posts/create_post.html',
                            {'form': form},
