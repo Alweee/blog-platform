@@ -20,7 +20,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 
-SECRET_KEY = 'en#+crg0duh2u%cvfta^tqka4a8+4f!_99qp%3h#b3avwpnh%j'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 DEBUG = True
