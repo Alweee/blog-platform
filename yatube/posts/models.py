@@ -51,7 +51,7 @@ class Post(models.Model):
         ordering = ['-pub_date']
 
     def __str__(self):
-        return self.text
+        return self.text[:10]
 
 
 class Comment(CreatedModel):

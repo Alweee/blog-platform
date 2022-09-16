@@ -8,8 +8,10 @@
 * django==2.2.6
 * pillow==7.0.0
 * sorl-thumbnail==12.6.3
+* unittests
 * django-debug-toolbar==3.2.4
 * flake8
+* Bootstrap
 
 ### Как запустить проект:
 
