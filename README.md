@@ -1,17 +1,15 @@
-# Проект blog-platform
-Платформа для блогов — с авторизацией, персональными лентами, с комментариями и подпиской на авторов.
-Проект написан на Python/Django.
+# Blog-Platform
+### Описание:
+Сайт, на котором можно создать свою страницу.
+Если на нее зайти, то можно посмотреть все записи автора.
+Записи можно отправить в сообщество и посмотреть там посты разных авторов.
+Можно подписываться на других авторов и оставлять комментарии под их постами.
+Автор может выбрать имя и уникальный адрес для своей страницы.
 
-### Список некоторых используемых технологий/пакетов:
+### Cтек технологий:
+[![Python](https://img.shields.io/badge/-Python-464646?style=flat&logo=Python&logoColor=56C0C0&color=008080)](https://www.python.org/)
+[![Django](https://img.shields.io/badge/-Django-464646?style=flat&logo=Django&logoColor=56C0C0&color=008080)](https://www.djangoproject.com/)
 
-* python==3.7.8
-* django==2.2.6
-* pillow==7.0.0
-* sorl-thumbnail==12.6.3
-* unittests
-* django-debug-toolbar==3.2.4
-* flake8
-* Bootstrap
 
 ### Как запустить проект:
 
