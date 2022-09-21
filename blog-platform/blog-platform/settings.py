@@ -25,7 +25,6 @@ CSRF_FAILURE_VIEW = 'core.views.csrf_failure'
 
 SECRET_KEY = os.getenv('SECRET_KEY')
 
-
 DEBUG = True
 
 ALLOWED_HOSTS = [
@@ -68,7 +67,7 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-ROOT_URLCONF = 'yatube.urls'
+ROOT_URLCONF = 'blog-platform.urls'
 
 TEMPLATES = [
     {
@@ -86,7 +85,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'yatube.wsgi.application'
+WSGI_APPLICATION = 'blog-platform.wsgi.application'
 
 
 DATABASES = {
