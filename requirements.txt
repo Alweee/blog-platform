@@ -22,3 +22,4 @@ wcwidth==0.1.8               # via pytest
 zipp==2.2.0                  # via importlib-metadata
 django-debug-toolbar==3.2.4
 coverage==6.4.4
+python-dotenv==0.21.0
