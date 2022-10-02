@@ -23,7 +23,7 @@
 
 `git clone git@github.com:Alweee/blog-platform.git`
 
-`cd yatube`
+`cd blog-platform`
 
 **Cоздать и активировать виртуальное окружение:**
 
